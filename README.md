@@ -1,4 +1,19 @@
-# create-svelte
+# sveltekit-chat
+
+### Getting started
+
+```
+docker-compose up
+nvm use
+npm run migrate
+npm run dev
+```
+
+Main service:
+http://localhost:5173/
+
+Adminer:
+http://localhost:8080/
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
