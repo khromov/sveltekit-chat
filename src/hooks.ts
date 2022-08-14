@@ -1,17 +1,15 @@
-console.log("Running hooks.ts");
+import { getClients, initialize as initializeSse } from '$lib/sse';
 
-// TODO: Run initSseClients() here, which will initialize the client array.
-// Also, once we throw an error for TypeError [ERR_INVALID_STATE]: Invalid state: Controller is already closed
-// Just remove the client from the array using clients.remove(id);
-let sseClients = [];
+initializeSse();
 
+/*
 setInterval(() => {
-	console.log('Logging sseClients', sseClients);
+	console.log('Logging sseClients', getClients());
 }, 3000);
+*/
 
 /** @type {import('@sveltejs/kit').Handle} */
-export async function handle({ event, resolve }) {
-  event.locals.sseClients = sseClients;
+export async function handle({ event, resolve } : { event: any, resolve: any }) {
   const response = await resolve(event);
   return response;
 }

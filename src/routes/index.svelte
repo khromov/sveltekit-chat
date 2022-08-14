@@ -35,7 +35,7 @@
 
             currentMessage = '';
         } catch(e) {
-            console.error('Something went wrong, try again!!');
+            console.error('Something went wrong, try again!');
         }
     }
 
