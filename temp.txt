@@ -10,3 +10,5 @@ flyctl proxy 54321:5432 -s -a dev-belong-db
 drop table chats;
 drop table messages;
 drop table users;
+
+https://joyofcode.xyz/sveltekit-authentication-using-cookies

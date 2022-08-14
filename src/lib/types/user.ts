@@ -1,3 +1,6 @@
+import { USER } from "$env/static/private";
+import type { RequestHandlerOutput } from "@sveltejs/kit";
+
 export interface UserAvatar {
     /* Todo
     head: string,
@@ -24,11 +27,16 @@ export interface User {
     status?: string,
     avatar?: UserAvatar,
     settings?: UserSettings,
-    primaryChat?: number,
-    firebaseUid?: string,
+    primary_chat?: number,
+    firebase_uid?: string,
     phone?: string,
     email?: string,
     user_type: 'firebase' | 'email',
     biography?: string,
-    secretToken: string,
+    secret_token: string,
+    password: string,
+}
+
+export interface NewUser extends Omit<User, 'id'|'secret_token'|'password'> {
+    password_unencrypted: string;
 }

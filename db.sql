@@ -45,7 +45,7 @@ CREATE TABLE "public"."users" (
     "firebaseUid" text,
     "phone" text,
     "email" text,
-    "user_type" character varying(16) DEFAULT 'firebase' NOT NULL,
+    "userType" character varying(16) DEFAULT 'firebase' NOT NULL,
     "biography" text,
     "secretToken" character varying(255) NOT NULL,
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")

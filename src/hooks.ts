@@ -1,15 +1,42 @@
-import { getClients, initialize as initializeSse } from '$lib/sse';
+import type { GetSession, Handle } from '@sveltejs/kit'
+import * as cookie from 'cookie'
+import { initialize as initializeSse } from '$lib/sse';
+import { getUser } from '$lib/db/user';
+
+// import { db } from '$lib/database'
 
 initializeSse();
 
-/*
-setInterval(() => {
-	console.log('Logging sseClients', getClients());
-}, 3000);
-*/
+export const handle: Handle = async ({ event, resolve }) => {
+  const cookieHeader = event.request.headers.get('cookie')
+  const cookies = cookie.parse(cookieHeader ?? '')
 
-/** @type {import('@sveltejs/kit').Handle} */
-export async function handle({ event, resolve } : { event: any, resolve: any }) {
-  const response = await resolve(event);
-  return response;
+  if (!cookies.session) {
+    return await resolve(event)
+  }
+
+  const user = await getUser(cookies.session, 'secret_token');
+
+  if (user) {
+    event.locals.user = user;
+  }
+
+  return await resolve(event)
+}
+
+/**
+ * Warning: This value gets sent down to the client!
+ */
+export const getSession: GetSession = ({ locals }) => {
+  if (!locals.user) {
+    return {};
+  }
+
+  return {
+    user: {
+      id: locals.user.id,
+      name: locals.user.email,
+      test: Math.random(),
+    },
+  }
 }

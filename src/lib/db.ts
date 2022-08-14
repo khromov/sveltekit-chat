@@ -43,7 +43,7 @@ export async function disconnect() : Promise<void> {
   if (pool !== null) {
     console.log('😵 Disconnecting from Postgres!');
     const thisPool = pool;
-    pool = undefined;
+    pool = null;
     return await thisPool.end();
   }
 
