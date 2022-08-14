@@ -16,7 +16,8 @@
 <script lang="ts">
     import { send } from '$lib/api'
 
-    let username: string;
+    let name: string;
+    let email: string;
     let password: string;
   
     // these props are passed from the page endpoint
@@ -45,13 +46,24 @@
 
   <form on:submit|preventDefault={register} method="post">
     <div>
-      <label for="username">E-mail</label>
+      <label for="name">Name</label>
       <input
-        id="username"
-        name="username"
+        id="name"
+        name="name"
         type="text"
         required
-        bind:value={username}
+        bind:value={name}
+      />
+    </div>
+    
+    <div>
+      <label for="email">E-mail</label>
+      <input
+        id="email"
+        name="email"
+        type="text"
+        required
+        bind:value={email}
       />
     </div>
   

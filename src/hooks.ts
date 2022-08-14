@@ -35,8 +35,7 @@ export const getSession: GetSession = ({ locals }) => {
   return {
     user: {
       id: locals.user.id,
-      name: locals.user.email,
-      test: Math.random(),
+      name: locals.user.name,
     },
   }
 }

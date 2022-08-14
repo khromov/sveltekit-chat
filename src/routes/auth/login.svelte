@@ -27,7 +27,8 @@
       if (response.error) {
         error = response.error
       }
-  
+      
+      // Why is this needed exactly?
       $session.user = response.user
   
       formEl.reset()
@@ -36,10 +37,10 @@
   
   <form on:submit|preventDefault={login} method="post">
     <div>
-      <label for="username">Username</label>
+      <label for="email">E-mail</label>
       <input
-        id="username"
-        name="username"
+        id="email"
+        name="email"
         type="text"
         required
       />

@@ -7,11 +7,11 @@ import type { User, UserPublic } from "$lib/types/user";
 declare global {
   namespace App {
     interface Locals {
-      user?: User;
+      user?: User; // Whole user object is present in Locals
     }
 
     interface Session {
-      user?: UserPublic
+      user?: UserPublic // Only public user is sent to session
     }
   }
 }

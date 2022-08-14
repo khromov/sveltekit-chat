@@ -21,7 +21,7 @@ export interface UserPublic {
     biography?: string,
 }
 
-export interface User {
+export type User = {
     id: number,
     name?: string,
     status?: string,

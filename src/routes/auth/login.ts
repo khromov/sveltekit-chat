@@ -1,36 +1,42 @@
-import { getUserWithValidCredentials } from '$lib/db/user';
+import { getUserPublic, getUserWithValidCredentials } from '$lib/db/user';
+import type { UserPublic } from '$lib/types/user';
 import type { RequestHandler } from '@sveltejs/kit';
 
 import { compare } from 'bcrypt';
 import { serialize } from 'cookie';
 
-export const POST: RequestHandler = async ({ request }) => {
-  const form = await request.formData()
-  const username = form.get('username')?.toString()?.trim();
+// https://github.com/sveltejs/kit/issues/1997
+// https://github.com/sveltejs/kit/issues/5468#issuecomment-1182231341
+interface PostOutput { user?: UserPublic | null }
+
+export const POST: RequestHandler<Record<string, string>, PostOutput> = async ({ request }) => {
+  const form = await request.formData();
+  
+  const email = form.get('email')?.toString()?.trim();
   const password = form.get('password')?.toString()?.trim();
 
   if (
-    typeof username !== 'string' ||
+    typeof email !== 'string' ||
     typeof password !== 'string'
   ) {
     return {
       status: 400,
       body: {
-        error: 'Enter a valid username and password.',
+        error: 'Enter a valid email and password.',
       },
     }
   }
 
-  if (!username || !password) {
+  if (!email || !password) {
     return {
       status: 400,
       body: {
-        error: 'Username and password are required.',
+        error: 'Email and password are required.',
       },
     }
   }
 
-  const matchedUser = await getUserWithValidCredentials(username, password);
+  const matchedUser = await getUserWithValidCredentials(email, password);
 
   if (!matchedUser) {
     return {
@@ -41,11 +47,13 @@ export const POST: RequestHandler = async ({ request }) => {
     }
   }
 
+  const matchedUserPublic = await getUserPublic(matchedUser.id);
+
   return {
     status: 200,
-    body: {
-      user: { foo: 'bar' },
-      success: 'Success.',
+    body: { // User will be set as the session var in SvelteKit,
+      user: matchedUserPublic, // TODO: Typing this seems hard, see https://kit.svelte.dev/docs/types#generated-types
+      success: 'Success!',
     },
     headers: {
       'Set-Cookie': serialize(

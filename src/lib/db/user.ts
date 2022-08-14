@@ -59,7 +59,7 @@ export async function userWithEmailExists(email: string): Promise<boolean> {
 }
 
 /**
- * @returns If a user with valid username and password is found, returns the user, else false
+ * @returns If a user with valid email and password is found, returns the user, else false
  */
 export async function getUserWithValidCredentials(email: string, password: string): Promise<User | false> {
     const foundUser = await getUser(email, 'email') as User;

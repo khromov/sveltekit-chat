@@ -3,10 +3,11 @@ import type { RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const form = await request.formData();
-	const username = form.get('username')?.toString()?.trim();
+	const name = form.get('name')?.toString()?.trim();
+	const email = form.get('email')?.toString()?.trim();
 	const password = form.get('password')?.toString()?.trim();
 
-	if (typeof username !== 'string' || typeof password !== 'string') {
+	if (typeof name !== 'string' || typeof email !== 'string' || typeof password !== 'string') {
 		return {
 			status: 400,
 			body: {
@@ -15,16 +16,16 @@ export const POST: RequestHandler = async ({ request }) => {
 		};
 	}
 
-	if (!username || !password) {
+	if (!name || !email || !password) {
 		return {
 			status: 400,
 			body: {
-				error: 'Username and password is required.'
+				error: 'Name, email and password are required.'
 			}
 		};
 	}
 
-	if (await userWithEmailExists(username)) {
+	if (await userWithEmailExists(email)) {
 		return {
 			status: 400,
 			body: {
@@ -35,14 +36,15 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	try {
 		await createUser({
-			email: username,
+			name,
+			email,
 			password_unencrypted: password,
 			user_type: 'email'
 		});
 
 		return {
 			status: 200,
-			body: { success: 'Success.' }
+			body: { success: 'Success.', }
 		};
 	} catch (error) {
 		console.error(error);
