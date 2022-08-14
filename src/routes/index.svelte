@@ -22,10 +22,6 @@
     import { v4 as uuidv4 } from 'uuid';
 
     import { onMount } from 'svelte';
-    import Login from '$lib/components/Login.svelte';
-    import { name } from '$lib/stores/preferences';
-
-    $: console.log($session);
 
     const uuid = uuidv4();
 
@@ -50,7 +46,6 @@
 				method: 'POST',
 				body: JSON.stringify({
                     message: currentMessage,
-                    name: $name,
                 }),
             });
 
@@ -61,24 +56,25 @@
     }
 </script>
 
-<Login />
-
+{#if messages.length > 0}
 <ul>
     {#each messages as message}
         <li>
             <strong>
                 {message?.name}
-            </strong>
+            </strong> :
             <span>
                 {message?.message}
             </span>
         </li>
     {/each}
 </ul>
+{:else}
+    No messages yet...
+{/if}
 
 <form on:submit|preventDefault={onSubmitMessage}>
-<label for="name">Name</label>
-<input type="text" name="name" bind:value={$name}><br><br>
+<h2>Messages</h2>
 <label for="message">Message</label>
 <!-- svelte-ignore a11y-autofocus -->
 <input type="text" name="message" bind:value={currentMessage} autofocus><br><br>
