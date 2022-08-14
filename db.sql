@@ -41,17 +41,19 @@ CREATE TABLE "public"."users" (
     "status" text,
     "avatar" json,
     "settings" json,
-    "primary_chat" integer,
-    "firebase_uid" text NOT NULL,
+    "primaryChat" integer,
+    "firebaseUid" text,
     "phone" text,
     "email" text,
     "user_type" character varying(16) DEFAULT 'firebase' NOT NULL,
+    "biography" text,
+    "secretToken" character varying(255) NOT NULL,
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
 
 ALTER TABLE ONLY "public"."messages" ADD CONSTRAINT "messages_chat_fkey" FOREIGN KEY (chat) REFERENCES chats(id) ON DELETE CASCADE NOT DEFERRABLE;
 
-ALTER TABLE ONLY "public"."users" ADD CONSTRAINT "users_primary_chat_fkey" FOREIGN KEY (primary_chat) REFERENCES chats(id) ON DELETE SET NULL NOT DEFERRABLE;
+ALTER TABLE ONLY "public"."users" ADD CONSTRAINT "users_primary_chat_fkey" FOREIGN KEY ("primaryChat") REFERENCES chats(id) ON DELETE SET NULL NOT DEFERRABLE;
 
--- 2022-08-14 02:30:21.060169+00
+-- 2022-08-14 17:17:18.168781+00
