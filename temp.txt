@@ -4,3 +4,9 @@ EXPLAIN SELECT id FROM chats WHERE id = 1 AND 1 = ANY(participants);
 // Better one
 // https://stackoverflow.com/questions/63996454/postgres-doesnt-use-index-on-integer-array-if-intarray-extension-is-installed/63996455#63996455
 SELECT id FROM chats WHERE id = 1 AND participants @> array[1];
+
+flyctl proxy 54321:5432 -s -a dev-belong-db
+
+drop table chats;
+drop table messages;
+drop table users;
