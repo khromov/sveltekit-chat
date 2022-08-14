@@ -5,8 +5,6 @@ import type { QueryConfig } from './types/db';
 let pool: Pool|null = null;
 
 export function maybeInitializePool() : Pool {
-    console.log(process.env.DB_URL);
-    console.log(parseInt(process.env.DB_CLIENTS || '22'));
   if (!pool) {
     console.log('🐘 Initializing Postgres connection!');
     pool = new Pool({
