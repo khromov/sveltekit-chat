@@ -29,7 +29,7 @@
 
     const uuid = uuidv4();
 
-    let messages = [];
+    let messages: { name: string, message: string }[] = [];
  
     let currentMessage = '';
 
@@ -59,8 +59,6 @@
             console.error('Something went wrong, try again!');
         }
     }
-
-    const updateName = () => {}
 </script>
 
 <Login />

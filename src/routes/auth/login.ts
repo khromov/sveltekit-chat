@@ -2,7 +2,6 @@ import { getUserPublic, getUserWithValidCredentials } from '$lib/db/user';
 import type { UserPublic } from '$lib/types/user';
 import type { RequestHandler } from '@sveltejs/kit';
 
-import { compare } from 'bcrypt';
 import { serialize } from 'cookie';
 
 // https://github.com/sveltejs/kit/issues/1997

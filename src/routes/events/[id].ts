@@ -1,6 +1,6 @@
 import { addClient, getClients, removeClient } from "$lib/sse";
 
-export const GET = ({ params, locals }: { params: any, locals: any }) => {
+export const GET = ({ params }: { params: any, locals: any }) => {
 	const id = params?.id || 'none';
 
 	return {
@@ -21,7 +21,7 @@ export const GET = ({ params, locals }: { params: any, locals: any }) => {
 	};
 };
 
-export const POST = async ({ request, params, locals } : { request: any, params: any, locals: any }) => {
+export const POST = async ({ request } : { request: any }) => {
 	const encoder = new TextEncoder();
 	const message = await request.text();
 	

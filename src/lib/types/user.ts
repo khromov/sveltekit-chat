@@ -1,6 +1,3 @@
-import { USER } from "$env/static/private";
-import type { RequestHandlerOutput } from "@sveltejs/kit";
-
 export interface UserAvatar {
     /* Todo
     head: string,
