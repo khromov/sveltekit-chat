@@ -16,9 +16,12 @@ export function maybeInitializePool() : Pool {
 }
 
 export async function query(incomingQuery: string, params: any[] = [], config: QueryConfig = {}) : Promise<QueryResult | null> {
-    maybeInitializePool();
+  maybeInitializePool();
 
   const timingStart = new Date();
+
+  // TODO: If process.env.DEBUG_QUERIES=true instead of passing debug config
+  //config.debug = true;
 
   if (config.debug) {
     console.info('----');

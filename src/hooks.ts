@@ -15,7 +15,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     return await resolve(event)
   }
 
-  const user = await getUser(cookies.session, 'secret_token');
+  const user = await getUser(cookies.session, 'ep_secret_token');
 
   if (user) {
     event.locals.user = user;

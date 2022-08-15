@@ -13,7 +13,9 @@
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"proxy-dev": "flyctl proxy 5432:5432 -a dev-belong-db",
-		"proxy-prod": "flyctl proxy 5432:5432 -s -a prod-belong-db"
+		"proxy-prod": "flyctl proxy 5432:5432 -s -a prod-belong-db",
+		"migrate": "node migrate.js",
+		"drop-tables": "node drop-tables.js"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.22.2",
@@ -48,6 +50,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"env-cmd": "^10.1.0"
+		"env-cmd": "^10.1.0",
+		"postgres-migrations": "^5.3.0"
 	}
 }

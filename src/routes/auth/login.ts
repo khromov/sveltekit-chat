@@ -57,7 +57,7 @@ export const POST: RequestHandler<Record<string, string>, PostOutput> = async ({
     headers: {
       'Set-Cookie': serialize(
         'session',
-        matchedUser.secret_token,
+        matchedUser.ep_secret_token,
         {
           // send cookie for every page
           path: '/',

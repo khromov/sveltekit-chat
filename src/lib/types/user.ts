@@ -27,13 +27,13 @@ export type User = {
     primary_chat?: number,
     firebase_uid?: string,
     phone?: string,
-    email?: string,
-    user_type: 'firebase' | 'email',
+    user_type: 'firebase' | 'ep' | 'magiclink', // ep = email+password
     biography?: string,
-    secret_token: string,
-    password: string,
+    ep_email?: string,
+    ep_password: string,
+    ep_secret_token: string,
 }
 
-export interface NewUser extends Omit<User, 'id'|'secret_token'|'password'> {
+export interface NewUser extends Omit<User, 'id'|'ep_secret_token'|'ep_password'> {
     password_unencrypted: string;
 }

@@ -25,21 +25,21 @@ export const POST: RequestHandler = async ({ request }) => {
 		};
 	}
 
-	if (await userWithEmailExists(email)) {
-		return {
-			status: 400,
-			body: {
-				error: 'User already exists'
-			}
-		};
-	}
-
 	try {
+		if (await userWithEmailExists(email)) {
+			return {
+				status: 400,
+				body: {
+					error: 'User already exists'
+				}
+			};
+		}
+		
 		await createUser({
 			name,
-			email,
+			ep_email: email,
 			password_unencrypted: password,
-			user_type: 'email'
+			user_type: 'ep'
 		});
 
 		return {
