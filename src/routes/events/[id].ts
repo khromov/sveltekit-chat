@@ -24,8 +24,6 @@ export const GET = ({ params }: { params: any, locals: any }) => {
 export const POST = async ({ request, locals } : { request: any, locals: App.Locals }) => {
 	const encoder = new TextEncoder();
 	const message = await request.text();
-
-	console.log('xo', JSON.parse(message));
 	
 	if(locals.user) {
 		const enrichedMessage = {

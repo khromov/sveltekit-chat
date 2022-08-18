@@ -21,6 +21,7 @@ CREATE SEQUENCE messages_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE
 
 CREATE TABLE "public"."messages" (
     "id" integer DEFAULT nextval('messages_id_seq') NOT NULL,
+    "client_uuid" character varying(255) NOT NULL,
     "chat" integer NOT NULL,
     "message" text NOT NULL,
     "created" timestamptz NOT NULL,

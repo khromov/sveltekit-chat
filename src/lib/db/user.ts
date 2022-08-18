@@ -25,11 +25,37 @@ export async function getUserPublic(id: number): Promise<UserPublic | null> {
 	return resultingUser;
 }
 
-export async function createUser(user: NewUser): Promise<boolean> {
+/**
+ * TODO: Refactor this into separate tables:
+ * users_ep, users_firebase + users_metadata that can reference both tables or something
+ * @param user 
+ * @returns userId or false if user was not created
+ */
+export async function createUser(user: NewUser): Promise<number | false> {
+
+    if(!user.password_unencrypted) {
+        console.error('❌ createUser: No password passed to createUser');
+        return false;
+    }
+
+    // Check if user already exists so we can bail.
+    if(user.user_type === 'ep') {
+
+        if(!user.ep_email) {
+            console.error('❌ createUser: Password required for ep user type');
+            return false;
+        }
+
+        if (await userWithEmailExists(user.ep_email)) {
+            console.error('❌ createUser: User already exists error');
+			return false;
+		}
+
+    }
 
     try {
-        await query(
-            `INSERT INTO users(name, status, avatar, settings, primary_chat, firebase_uid, phone, ep_email, user_type, biography, ep_secret_token, ep_password) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);`,
+        const result = await query(
+            `INSERT INTO users(name, status, avatar, settings, primary_chat, firebase_uid, phone, ep_email, user_type, biography, ep_secret_token, ep_password) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id;`,
             [
                 user.name,
                 user.status,
@@ -46,7 +72,8 @@ export async function createUser(user: NewUser): Promise<boolean> {
             ]
         );
 
-        return true;
+        console.log(`✅ Created user with id ${result?.rows?.[0]?.id}`);
+        return result?.rows?.[0]?.id || false;
     } catch(e) {
         console.error(`❌ Could not create user`, e);
         return false;

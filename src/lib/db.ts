@@ -20,10 +20,7 @@ export async function query(incomingQuery: string, params: any[] = [], config: Q
 
   const timingStart = new Date();
 
-  // TODO: If process.env.DEBUG_QUERIES=true instead of passing debug config
-  //config.debug = true;
-
-  if (config.debug) {
+  if (config.debug || process.env?.DB_DEBUG) {
     console.info('----');
     console.info(`🔰 Query: ${incomingQuery}`);
     console.info('📊 Data: ', params);

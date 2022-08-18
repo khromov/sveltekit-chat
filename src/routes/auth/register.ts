@@ -35,7 +35,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			};
 		}
 		
-		await createUser({
+		const userId = await createUser({
 			name,
 			ep_email: email,
 			password_unencrypted: password,
@@ -44,7 +44,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		return {
 			status: 200,
-			body: { success: 'Success.', }
+			body: { success: 'Success.', userId }
 		};
 	} catch (error) {
 		console.error(error);
