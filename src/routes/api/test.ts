@@ -16,6 +16,7 @@ export const GET = async ({ params }: { params: any }) => {
 		  'access-control-allow-origin': '*'
 		},
 		body: {
+			id,
 			user: userId,
 			isValidUserCredentials: await getUserWithValidCredentials('test', 'test'),
 		}

@@ -36,6 +36,8 @@ export const getSession: GetSession = ({ locals }) => {
     user: {
       id: locals.user.id,
       name: locals.user.name,
+      avatar: locals.user.avatar,
+      biography: locals.user.biography,
     },
   }
 }

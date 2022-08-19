@@ -13,23 +13,23 @@ export interface UserSettings {
 
 export interface UserPublic {
     id: number,
-    name?: string,
-    avatar?: UserAvatar,
-    biography?: string,
+    name?: string | null,
+    avatar?: UserAvatar | null,
+    biography?: string | null,
 }
 
 export type User = {
     id: number,
-    name?: string,
-    status?: string,
-    avatar?: UserAvatar,
-    settings?: UserSettings,
-    primary_chat?: number,
-    firebase_uid?: string,
-    phone?: string,
+    name?: string | null,
+    status?: string | null,
+    avatar?: UserAvatar | null,
+    settings?: UserSettings | null,
+    primary_chat?: number | null,
+    firebase_uid?: string | null,
+    phone?: string | null,
     user_type: 'firebase' | 'ep' | 'magiclink', // ep = email+password
-    biography?: string,
-    ep_email?: string,
+    biography?: string | null,
+    ep_email?: string | null,
     ep_password: string,
     ep_secret_token: string,
 }

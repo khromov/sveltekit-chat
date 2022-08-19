@@ -17,7 +17,7 @@
 </script>
 
 <script lang="ts">
-    import { session } from '$app/stores'
+    // import { session } from '$app/stores'
     import ReconnectingEventSource from 'reconnecting-eventsource';
     import { v4 as uuidv4 } from 'uuid';
 
