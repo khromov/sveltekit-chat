@@ -1,5 +1,5 @@
 import { compare, hash } from 'bcrypt';
-import cuid from 'cuid';
+import { nanoid } from 'nanoid';
 import { query } from '$lib/db';
 import type { User, UserPublic, NewUser } from '$lib/types/users';
 
@@ -67,7 +67,7 @@ export async function createUser(user: NewUser): Promise<number | false> {
                 user.ep_email,
                 user.user_type,
                 user.biography,
-                cuid(), // secretToken,
+                nanoid(32), // secretToken,
                 (await hash(user.password_unencrypted, 10))
             ]
         );

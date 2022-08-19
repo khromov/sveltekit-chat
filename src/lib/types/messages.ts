@@ -1,4 +1,4 @@
-export type Timestamp = number;
+export type Timestamp = Date;
 
 export type Message = {
     id: number,
@@ -7,12 +7,14 @@ export type Message = {
     message: string,
     created: Timestamp,
     last_updated: Timestamp,
-    metadata?: Record<string, any> | null,
+    metadata: Record<string, any> | null,
 }
 
 /**
  * A message before it has been inserted into the DB
  */
-export interface NewMessage extends Omit<Message, 'test'> {
-    password_unencrypted: string;
+export interface NewMessage extends Omit<Message, 'id' | 'created' | 'last_updated' | 'metadata'> {
+    created?: Timestamp,
+    last_updated?: Timestamp,
+    metadata?: Record<string, any> | null,
 }
