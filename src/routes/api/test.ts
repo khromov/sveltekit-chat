@@ -1,4 +1,4 @@
-import { createUser, getUserWithValidCredentials } from "$lib/db/user";
+import { createUser, getUserWithValidCredentials } from "$lib/db/users";
 
 export const GET = async ({ params }: { params: any }) => {
 	const id = params?.id || 'none';

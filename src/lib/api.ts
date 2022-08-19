@@ -1,4 +1,4 @@
-import type { UserPublic } from './types/user';
+import type { UserPublic } from './types/users';
 
 // TODO: This should really be refactored out into a user-specific fetch function
 type Send = Promise<{

@@ -1,4 +1,4 @@
-import { getUser, getUserPublic } from "$lib/db/user";
+import { getUser, getUserPublic } from "$lib/db/users";
 
 export const GET = async ({ params }: { params: any }) => {
 	const id = params?.id || 'none';

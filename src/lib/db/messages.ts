@@ -1,7 +1,7 @@
 import { compare, hash } from 'bcrypt';
 import cuid from 'cuid';
 import { query } from '$lib/db';
-import type { User, UserPublic, NewUser } from '$lib/types/user';
+import type { User, UserPublic, NewUser } from '$lib/types/users';
 
 export async function getUser(value: number | string, by: 'id' | 'ep_email' | 'ep_secret_token' = 'id'): Promise<User | null> {
 	try {

@@ -1,4 +1,4 @@
-import { createUser, userWithEmailExists } from '$lib/db/user';
+import { createUser, userWithEmailExists } from '$lib/db/users';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {

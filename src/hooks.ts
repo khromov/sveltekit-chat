@@ -1,7 +1,7 @@
 import type { GetSession, Handle } from '@sveltejs/kit'
 import * as cookie from 'cookie'
 import { initialize as initializeSse } from '$lib/sse';
-import { getUser } from '$lib/db/user';
+import { getUser } from '$lib/db/users';
 
 // import { db } from '$lib/database'
 

@@ -2,7 +2,7 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
-import type { User, UserPublic } from "$lib/types/user";
+import type { User, UserPublic } from "$lib/types/users";
 
 declare global {
   namespace App {

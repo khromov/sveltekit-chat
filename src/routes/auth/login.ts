@@ -1,5 +1,5 @@
-import { getUserPublic, getUserWithValidCredentials } from '$lib/db/user';
-import type { UserPublic } from '$lib/types/user';
+import { getUserPublic, getUserWithValidCredentials } from '$lib/db/users';
+import type { UserPublic } from '$lib/types/users';
 import type { RequestHandler } from '@sveltejs/kit';
 
 import { serialize } from 'cookie';
