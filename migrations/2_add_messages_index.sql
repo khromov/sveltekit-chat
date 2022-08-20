@@ -1,0 +1,1 @@
+CREATE INDEX "messages_chat_last_updated" ON "public"."messages" USING btree ("chat", "last_updated" DESC);
