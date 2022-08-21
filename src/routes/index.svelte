@@ -22,12 +22,34 @@
     import { v4 as uuidv4 } from 'uuid';
 
     import { onMount } from 'svelte';
+    import type { Chat } from '$lib/types/chats';
 
     const uuid = uuidv4();
 
     let messages: { name: string, message: string }[] = [];
  
     let currentMessage = '';
+
+    const fetchChats = async() => {
+        const result = (await (await fetch(`/api/chat/getAvailable`)).json());
+
+        if(result.error) {
+            throw new Error(result.error);
+        }
+
+        return result;
+    };
+
+    // TODO: Make this possible to retry
+    let fetchChatsInitial = (async(): Promise<Chat[]> => {
+        return fetchChats();
+    })();
+
+    const retryChatFetch = () => {
+        fetchChatsInitial = (async(): Promise<Chat[]> => {
+        return fetchChats();
+        })();
+    }
 
 	onMount(() => {
 		const events = new ReconnectingEventSource(`/events/${uuid}`);
@@ -56,6 +78,23 @@
     }
 </script>
 
+<h3>Available chats</h3>
+
+{#await fetchChatsInitial}
+    Loading chats...
+{:then chatData}
+    <ul>
+        {#each chatData as chat}
+            <li>
+                {chat.id}
+            </li>
+        {/each}
+    </ul>
+{:catch error}
+    Could not fetch chats: {error.message} <br/><button on:click={retryChatFetch}>Try again</button> <!-- TODO fix error state -->
+{/await}
+
+<h3>Current chat</h3>
 {#if messages.length > 0}
 <ul>
     {#each messages as message}

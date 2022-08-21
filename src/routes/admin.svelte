@@ -19,7 +19,7 @@
     import { session } from '$app/stores';
   </script>
   
-  <h1>Protected</h1>
+  <h1>Admin area</h1>
   
   <p>Welcome {$session.user?.name}!</p>
   

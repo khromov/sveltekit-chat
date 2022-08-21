@@ -28,7 +28,7 @@ export async function query(incomingQuery: string, params: any[] = [], config: Q
 
   if(pool) {
     const results = await pool.query(incomingQuery, params);
-    if (config.debug) {
+    if (config.debug || process.env?.DB_DEBUG) {
       console.info('⏰ Postgres query execution time: %dms', (new Date().getTime() - timingStart.getTime()));
       console.info('----');
     }

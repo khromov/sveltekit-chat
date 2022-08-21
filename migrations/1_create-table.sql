@@ -7,6 +7,9 @@ CREATE SEQUENCE chats_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 CREATE TABLE "public"."chats" (
     "id" integer DEFAULT nextval('chats_id_seq') NOT NULL,
     "status" character varying(16) NOT NULL,
+    "nickname" text NOT NULL,
+    "created" timestamptz NOT NULL,
+    "last_message" timestamptz,
     "participants" integer[],
     "removed_participants" integer[],
     CONSTRAINT "chats_pkey" PRIMARY KEY ("id")
@@ -31,7 +34,7 @@ CREATE TABLE "public"."messages" (
 ) WITH (oids = false);
 
 CREATE INDEX "messages_chat" ON "public"."messages" USING btree ("chat");
-
+CREATE INDEX "messages_chat_last_updated" ON "public"."messages" USING btree ("chat", "last_updated" DESC);
 
 DROP TABLE IF EXISTS "users";
 DROP SEQUENCE IF EXISTS users_id_seq;

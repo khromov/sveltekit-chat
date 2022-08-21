@@ -15,7 +15,7 @@
   {/if}
 
   {#if $session.user}
-    <a href="/protected">Admin</a>
+    <a href="/admin">Admin</a>
     <a href="/auth/logout">Log out</a>
   {/if}
 </nav>

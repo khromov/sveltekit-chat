@@ -34,6 +34,10 @@ export type User = {
     ep_secret_token: string,
 }
 
+/**
+ * An item before it has been inserted into the DB, typically
+ * received by the create method
+ */
 export interface NewUser extends Omit<User, 'id'|'ep_secret_token'|'ep_password'> {
     password_unencrypted: string;
 }

@@ -1,11 +1,10 @@
 import { createMessage } from "$lib/db/messages";
 import { createUser, getUserWithValidCredentials } from "$lib/db/users";
 import { generateClientUuid } from "$lib/helpers";
+import { getChatsAccessibleByUserId } from "$lib/db/chats";
 
 export const GET = async ({ params }: { params: any }) => {
 	const id = params?.id || 'none';
-
-
 
 	/*
 	const userId = await createUser({
@@ -14,7 +13,7 @@ export const GET = async ({ params }: { params: any }) => {
 		password_unencrypted: 'hello', 
 		user_type: 'ep',
 	});
-	*/
+
 
 	const messageIds = [];
 	for(let i = 0; i < 500000; i++) {
@@ -26,6 +25,10 @@ export const GET = async ({ params }: { params: any }) => {
 
 		messageIds.push(id);
 	}
+	*/
+
+	const availableChats = await getChatsAccessibleByUserId(1);
+	console.log(availableChats);
 
 	return {
 		status: 200,
@@ -33,10 +36,11 @@ export const GET = async ({ params }: { params: any }) => {
 		  'access-control-allow-origin': '*'
 		},
 		body: {
-			id,
-			messageIds,
+			availableChats
+			//id,
+			// messageIds,
 			//user: userId,
-			isValidUserCredentials: await getUserWithValidCredentials('test', 'test'),
+			//isValidUserCredentials: await getUserWithValidCredentials('test', 'test'),
 		}
 	  };
 };

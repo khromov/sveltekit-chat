@@ -1,5 +1,6 @@
 // Crappy one
-EXPLAIN SELECT id FROM chats WHERE id = 1 AND 1 = ANY(participants);
+//EXPLAIN SELECT id FROM chats WHERE id = 1 AND 1 = ANY(participants);
+SELECT id FROM chats WHERE 1 = ANY(participants);
 
 // Better one
 // https://stackoverflow.com/questions/63996454/postgres-doesnt-use-index-on-integer-array-if-intarray-extension-is-installed/63996455#63996455

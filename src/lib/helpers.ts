@@ -9,3 +9,26 @@ import cuid from 'cuid'
 export function generateClientUuid(extraUniqueness: string | number = ''): string {
     return `${cuid()}-${extraUniqueness}`
 }
+
+export function apiResponse(body: Record<string, any>, status = 200, headers = {}) {
+    return {
+        status,
+        headers: {
+        'access-control-allow-origin': '*', //TODO: Do we want this?
+          ...headers,
+        },
+        body
+    }    
+}
+
+export function apiErrorResponse(error: string, status = 500) {
+    return apiResponse({
+        error,
+    }, status);
+}
+
+export function apiNoAccessResponse(message = 'You do not have access to this resource') {
+    return apiResponse({
+        error: message,
+    }, 403);
+}

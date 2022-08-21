@@ -15,7 +15,8 @@
 		"proxy-dev": "flyctl proxy 5432:5432 -a dev-belong-db",
 		"proxy-prod": "flyctl proxy 5432:5432 -s -a prod-belong-db",
 		"migrate": "node migrate.js",
-		"drop-tables": "node scripts/drop-tables.js"
+		"drop-tables": "node scripts/drop-tables.js",
+		"reset-db": "node scripts/drop-tables.js && npm run migrate"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.22.2",
@@ -41,6 +42,7 @@
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
 		"reconnecting-eventsource": "^1.5.1",
+		"sleep-promise": "^9.1.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
 		"svelte-local-storage-store": "^0.2.6",
