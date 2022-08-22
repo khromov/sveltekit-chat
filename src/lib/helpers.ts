@@ -7,7 +7,7 @@ import cuid from 'cuid'
  * @returns 
  */
 export function generateClientUuid(extraUniqueness: string | number = ''): string {
-    return `${cuid()}-${extraUniqueness}`
+    return `${cuid()}${extraUniqueness ? `-${extraUniqueness}` : ''}`;
 }
 
 export function apiResponse(body: Record<string, any>, status = 200, headers = {}) {
