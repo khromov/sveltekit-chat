@@ -30,7 +30,7 @@ services:
           ADMINER_DB: chat # TODO: Get from env_file
           ADMINER_DRIVER: pgsql
           ADMINER_PASSWORD: admin
-          ADMINER_SERVER: host.docker.internal
+          ADMINER_SERVER: db
           ADMINER_USERNAME: admin
           ADMINER_AUTOLOGIN: 1
           ADMINER_NAME: Adminer

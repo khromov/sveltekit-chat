@@ -3,6 +3,7 @@
 ### Getting started
 
 ```
+cp .env.example .env
 docker-compose up
 nvm use
 npm run migrate

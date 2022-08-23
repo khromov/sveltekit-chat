@@ -1,13 +1,14 @@
-import { Pool } from 'pg';
+import PG from 'pg';
+import type { Pool } from 'pg';
 import type { QueryResult } from 'pg';
 import type { QueryConfig } from './types/db';
 
-let pool: Pool|null = null;
+let pool: Pool | null = null;
 
 export function maybeInitializePool() : Pool {
   if (!pool) {
     console.log('🐘 Initializing Postgres connection!');
-    pool = new Pool({
+    pool = new PG.Pool({
       connectionString: process.env.DB_URL || 'postgres://admin:admin@localhost:54321/chat',
       max: parseInt(process.env.DB_CLIENTS || '10'),
     });
